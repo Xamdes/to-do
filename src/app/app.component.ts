@@ -61,7 +61,6 @@ export class AppComponent
     this.selectedTask = null;
   }
 
-  // newDescription: string = "Please enter description of task!";
   AddTask(description: string, priority: number)
   {
     this.tasks.push(new Task(description,priority));
@@ -73,14 +72,9 @@ export class AppComponent
     this.addingTask = !this.addingTask;
   }
 
-  RemoveTask(currentTask)
+  RemoveTask(tempTask)
   {
-    this.tasks = FilterRemove(this.tasks,currentTask);
+    this.tasks = this.tasks.filter(e => e !== tempTask);
   }
 
-}
-
-function FilterRemove(array, element)
-{
-    return array.filter(e => e !== element);
 }
