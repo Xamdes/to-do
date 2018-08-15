@@ -20,8 +20,9 @@ export class AppComponent
   ];
   selectedTask: Task = this.tasks[0];
 
-  EditTask()  {
-    alert("Time to edit!");
+  EditTask(clickedTask)
+  {
+    this.selectedTask = clickedTask;
   }
 
   PriorityColor(currentTask)
@@ -34,6 +35,20 @@ export class AppComponent
       return "bg-danger";
       default:
       return "bg-info";
+    }
+  }
+
+  IsSelected(currentTask)
+  {
+    console.log(currentTask.description);
+    console.log(this.selectedTask.description);
+    if(currentTask.description === this.selectedTask.description)
+    {
+      return "btn-success";
+    }
+    else
+    {
+      return "btn-primary";
     }
   }
 
