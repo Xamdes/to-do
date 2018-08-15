@@ -1,8 +1,15 @@
-<h1>To Do List for {{month}}/{{day}}/{{year}}</h1>
-<h3>{{currentFocus}}</h3>
-<ul>
-  <li *ngFor="let ct of tasks">
-    {{ct.description}}
-    <!-- <button (click)="EditTask()">Edit!</button> -->
-  </li>
-</ul>
+<div class="container-fluid">
+  <h1>Welcome, {{userName}}!</h1>
+  <form>
+    <input [(ngModel)]="userName" type="text" name="user">
+  </form>
+
+  <h2>To Do List for {{month}}/{{day}}/{{year}}</h2>
+  <h3>{{currentFocus}}</h3>
+  <ul>
+    <li [class]="PriorityColor(ct)" *ngFor="let ct of tasks">
+      {{ct.description}}
+      <button (click)="EditTask()">Edit!</button>
+    </li>
+  </ul>
+</div>
