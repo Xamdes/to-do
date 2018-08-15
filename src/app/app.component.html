@@ -1,37 +1,15 @@
 <div class="container-fluid bg-light">
-  <div class="center-middle">
+  <div class="jumbotron center-middle">
     <h1>Welcome, {{userName}}!</h1>
     <form>
       <label for="user">Name: </label>
       <input [(ngModel)]="userName" type="text" name="user">
     </form>
   </div>
-  <div *ngIf="addingTask">
-    <h3>Add Task</h3>
-    <label>Enter Task Description:</label>
-    <input [(ngModel)]="newDescription" name="newDescription">
-    <label>Enter Task Priority (1-3):</label><br>
-    <input type="radio" [(ngModel)]="newPriority" [value]="1">1 (Low Priority)<br>
-    <input type="radio" [(ngModel)]="newPriority" [value]="2">2 (Medium Priority)<br>
-    <input type="radio" [(ngModel)]="newPriority" [value]="3">3 (High Priority)<br>
-    <button class="btn btn-small btn-info" (click)="AddTask(newDescription,newPriority)">Add</button>
-  </div>
-  <div *ngIf="selectedTask">
-    <h3>Edit Task</h3>
-    <b>{{selectedTask.description}}</b><br>
-    <label>Enter Task Description:</label>
-    <input [(ngModel)]="selectedTask.description">
-    <label>Enter Task Priority (1-3):</label><br>
-    <input type="radio" [(ngModel)]="selectedTask.priority" [value]="1">1 (Low Priority)<br>
-    <input type="radio" [(ngModel)]="selectedTask.priority" [value]="2">2 (Medium Priority)<br>
-    <input type="radio" [(ngModel)]="selectedTask.priority" [value]="3">3 (High Priority)<br>
-    <label>Task Done:</label><br>
-    <input type="radio" [(ngModel)]="selectedTask.done" [value]="true">Yes<br>
-    <input type="radio" [(ngModel)]="selectedTask.done" [value]="false">No<br>
-    <button class="btn btn-small btn-info" (click)="FinishedEditing()">Done</button>
-  </div>
-  <div>
-    <div class="">
+
+  <div class="bg-grey">
+    <br>
+    <div>
       <h2 class="center-middle">To Do List for {{month}}/{{day}}/{{year}}</h2>
       <h3 class="center-middle">{{currentFocus}}</h3>
       <div class="center-middle">
@@ -40,23 +18,58 @@
       <br>
     </div>
 
-    <ul class="well bg-teal">
-      <li style="list-style-type:none">
-      <div class="row">
-        <div class="col-md-1"><b>Edit Task</b></div>
-        <div class="col-md-1 center-middle"><b>Done</b></div>
-        <div class="col-md-8 center-middle"><b>Description</b></div>
-        <div class="col-md-2 shift-right"><b>Delete Task</b></div>
+    <div class="center-middle" *ngIf="addingTask">
+      <div class="left-middle">
+        <h3>Add Task</h3>
+        <label>Enter Task Description:</label>
+        <input [(ngModel)]="newDescription" name="newDescription">
+        <label>Enter Task Priority (1-3):</label><br>
+        <input type="radio" [(ngModel)]="newPriority" [value]="1">1 (Low Priority)<br>
+        <input type="radio" [(ngModel)]="newPriority" [value]="2">2 (Medium Priority)<br>
+        <input type="radio" [(ngModel)]="newPriority" [value]="3">3 (High Priority)<br>
+        <button class="btn btn-small btn-info" (click)="AddTask(newDescription,newPriority)">Add</button>
       </div>
-      </li>
-      <li [class]="PriorityColor(ct)" *ngFor="let ct of tasks">
-        <div class="row">
-          <div class="col-md-1"><button [class]="IsSelected(ct)" (click)="EditTask(ct)">Edit</button></div>
-          <div class="col-md-1 center-middle">{{ct.TaskDone()}}</div>
-          <div class="col-md-9 center-middle">{{ct.description}}</div>
-          <div class="col-md-1 shift-right"><button class="btn-dark" (click)="RemoveTask(ct)">Delete</button></div>
-        </div>
-      </li>
-    </ul>
+    </div>
+    <div class="center-middle" *ngIf="selectedTask">
+      <div class="left-middle">
+        <h3>Edit Task</h3>
+        <b>{{selectedTask.description}}</b><br>
+        <label>Enter Task Description:</label>
+        <input [(ngModel)]="selectedTask.description">
+        <label>Enter Task Priority (1-3):</label><br>
+        <input type="radio" [(ngModel)]="selectedTask.priority" [value]="1">1 (Low Priority)<br>
+        <input type="radio" [(ngModel)]="selectedTask.priority" [value]="2">2 (Medium Priority)<br>
+        <input type="radio" [(ngModel)]="selectedTask.priority" [value]="3">3 (High Priority)<br>
+        <label>Task Done:</label><br>
+        <input type="radio" [(ngModel)]="selectedTask.done" [value]="true">Yes<br>
+        <input type="radio" [(ngModel)]="selectedTask.done" [value]="false">No<br>
+        <button class="btn btn-small btn-info" (click)="FinishedEditing()">Done</button>
+      </div>
+    </div>
+    <br>
+    <div class="row">
+      <div class="col-md-1"></div>
+      <div class="col-md-10">
+        <ul class="rounded">
+          <li class="bg-light" style="list-style-type:none">
+            <div class="row">
+              <div class="col-md-1"><b>Edit Task</b></div>
+              <div class="col-md-1 center-middle"><b>Done</b></div>
+              <div class="col-md-8 center-middle"><b>Description</b></div>
+              <div class="col-md-2 shift-right"><b>Delete Task</b></div>
+            </div>
+          </li>
+          <li [class]="PriorityColor(ct)" *ngFor="let ct of tasks">
+            <div class="row">
+              <div class="col-md-1"><button [class]="IsSelected(ct)" (click)="EditTask(ct)">Edit</button></div>
+              <div class="col-md-1 center-middle">{{ct.TaskDone()}}</div>
+              <div class="col-md-9 center-middle">{{ct.description}}</div>
+              <div class="col-md-1 shift-right"><button class="btn-dark" (click)="RemoveTask(ct)">Delete</button></div>
+            </div>
+          </li>
+        </ul>
+      </div>
+      <div class="col-md-1"></div>
+    </div>
   </div>
 </div>
