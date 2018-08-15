@@ -8,6 +8,8 @@ import { Task } from './models/task.model';
 })
 export class AppComponent
 {
+
+  addingTask: boolean = false;
   currentFocus: string = 'Angular Homework';
   currentTime: Date = new Date();
   month: number = this.currentTime.getMonth() + 1;
@@ -59,4 +61,26 @@ export class AppComponent
     this.selectedTask = null;
   }
 
+  // newDescription: string = "Please enter description of task!";
+  AddTask(description: string, priority: number)
+  {
+    this.tasks.push(new Task(description,priority));
+    this.addingTask = !this.addingTask;
+  }
+
+  ToggleAddTask()
+  {
+    this.addingTask = !this.addingTask;
+  }
+
+  RemoveTask(currentTask)
+  {
+    this.tasks = FilterRemove(this.tasks,currentTask);
+  }
+
+}
+
+function FilterRemove(array, element)
+{
+    return array.filter(e => e !== element);
 }
