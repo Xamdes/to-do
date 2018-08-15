@@ -18,11 +18,18 @@ export class AppComponent
     new Task('Begin brainstorming possible JavaScript group projects',2),
     new Task('Add README file to last few Angular repos on GitHub',2)
   ];
-  selectedTask: Task = this.tasks[0];
+  selectedTask: Task = null;
 
   EditTask(clickedTask)
   {
-    this.selectedTask = clickedTask;
+    if(this.selectedTask === null || this.selectedTask.description != clickedTask.description)
+    {
+      this.selectedTask = clickedTask;
+    }
+    else
+    {
+      this.selectedTask = null;
+    }
   }
 
   PriorityColor(currentTask)
@@ -40,16 +47,16 @@ export class AppComponent
 
   IsSelected(currentTask)
   {
-    console.log(currentTask.description);
-    console.log(this.selectedTask.description);
-    if(currentTask.description === this.selectedTask.description)
-    {
-      return "btn-success";
-    }
-    else
+    if((this.selectedTask != null) && (currentTask.description === this.selectedTask.description))
     {
       return "btn-primary";
     }
+    return "btn-dark";
+  }
+
+  FinishedEditing()
+  {
+    this.selectedTask = null;
   }
 
 }
