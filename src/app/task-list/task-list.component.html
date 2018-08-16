@@ -1,0 +1,18 @@
+<ul class="rounded">
+  <li class="bg-light" style="list-style-type:none">
+    <div class="row">
+      <div class="col-md-1"><b>Edit Task</b></div>
+      <div class="col-md-1 center-middle"><b>Done</b></div>
+      <div class="col-md-8 center-middle"><b>Description</b></div>
+      <div class="col-md-2 shift-right"><b>Delete Task</b></div>
+    </div>
+  </li>
+  <li [class]="PriorityColor(ct)" *ngFor="let ct of childTaskList">
+    <div class="row">
+      <div class="col-md-1"><button [class]="IsSelected(ct)" (click)="EditButtonClicked(ct)">Edit</button></div>
+      <div class="col-md-1 center-middle">{{ct.TaskDone()}}</div>
+      <div class="col-md-9 center-middle">{{ct.description}}</div>
+      <div class="col-md-1 shift-right"><button class="btn-dark" (click)="RemoveButtonClicked(ct)">Delete</button></div>
+    </div>
+  </li>
+</ul>

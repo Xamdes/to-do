@@ -15,12 +15,13 @@ export class AppComponent
   month: number = this.currentTime.getMonth() + 1;
   day: number = this.currentTime.getDate();
   year: number = this.currentTime.getFullYear();
-  tasks: Task[] = [
+  selectedTask: Task = null;
+
+  masterTaskList: Task[] = [
     new Task('Finish weekend Angular homework for Epicodus course',3),
     new Task('Begin brainstorming possible JavaScript group projects',2),
     new Task('Add README file to last few Angular repos on GitHub',2)
   ];
-  selectedTask: Task = null;
 
   EditTask(clickedTask)
   {
@@ -34,27 +35,7 @@ export class AppComponent
     }
   }
 
-  PriorityColor(currentTask)
-  {
-    switch(currentTask.priority)
-    {
-      case 2:
-      return "bg-warning";
-      case 3:
-      return "bg-danger";
-      default:
-      return "bg-info";
-    }
-  }
 
-  IsSelected(currentTask)
-  {
-    if((this.selectedTask != null) && (currentTask.description === this.selectedTask.description))
-    {
-      return "btn-primary";
-    }
-    return "btn-dark";
-  }
 
   FinishedEditing()
   {
@@ -63,7 +44,7 @@ export class AppComponent
 
   AddTask(description: string, priority: number)
   {
-    this.tasks.push(new Task(description,priority));
+    this.masterTaskList.push(new Task(description,priority));
     this.addingTask = !this.addingTask;
   }
 
@@ -74,7 +55,7 @@ export class AppComponent
 
   RemoveTask(tempTask)
   {
-    this.tasks = this.tasks.filter(e => e !== tempTask);
+    this.masterTaskList = this.masterTaskList.filter(e => e !== tempTask);
   }
 
 }
