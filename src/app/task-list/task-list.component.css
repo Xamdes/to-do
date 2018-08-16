@@ -1,0 +1,14 @@
+.center-middle {
+  text-align: center;
+  vertical-align: middle;
+}
+
+.left-middle  {
+  text-align: left;
+  vertical-align: middle;
+  display: inline-block;
+}
+
+.shift-right  {
+  text-align: right;
+}
